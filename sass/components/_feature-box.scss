@@ -1,0 +1,28 @@
+
+.feature-box {
+
+    background-color: rgba($color-white, 0.6);
+    font-size: 1.5rem; //inherted by paragraph element containing text
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+    transition: transform 0.2s;
+
+    &__icon {
+        //this is effectively a font!
+        font-size: 6rem;
+        margin-bottom: 0.5rem;
+        
+        // to allow for gradient font color
+        display: inline-block; // prevents background image from stretching all the way to 100% width
+        background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+        -webkit-background-clip: text; // clips background to the text
+        background-clip: text;
+        color: transparent;
+    }
+
+    &:hover {
+        transform: translateY(-1.5rem) scale(1.03);
+    }
+}

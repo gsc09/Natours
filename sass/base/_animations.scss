@@ -1,0 +1,53 @@
+// partial
+
+/* animation for moving in from left and also fading in */
+@keyframes moveInFromLeft {
+    0% { /* at beginning of animation */
+        opacity: 0; /* invisible */
+        transform: translateX(-10rem); /* animate horizontally, start towards left */
+        /* transform: rotate(-80deg); /* for the lols */
+    }
+
+    60% {
+        /* transform: rotate(120deg); /* for the lols */
+    }
+
+    80% {
+        transform: translateX(1rem); /* causes slight bounce to the right */
+    }
+
+    100% { /* at end of animation */
+        opacity: 1; /* fully opaque */
+        transform: translateX(0);
+    }
+}
+
+/* animation for moving in from right and also fading in */
+@keyframes moveInFromRight {
+    0% { 
+        opacity: 0; 
+        transform: translateX(10rem);
+    }
+
+    80% {
+        transform: translateX(-1rem);
+    }
+
+    100% { 
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* animation for button moving up from bottom */
+@keyframes moveInButtonFromBottom {
+    0% { 
+        opacity: 0; 
+        transform: translateY(2rem);
+    }
+
+    100% { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

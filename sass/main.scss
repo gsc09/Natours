@@ -1,0 +1,105 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/*
+SASS
+
+- CSS pre-processor 
+- allows for variables, nesting, operators, partials/imports, mixins, functions, extensions, control directives (not covered here)
+- Sass vs SCSS - two different syntaxes for SASS. Sass isn't indent-dependent and doesn't require semicolons/curly braces; kinda confusing
+    - SCSS is preferred, looks more like original CSS
+
+- variables:        
+    - starts with a $
+
+- color functions - can darken a color instead of manually selecting a darker color
+
+- TO INSTALL, first install Node and then:
+    make sure python and Desktop dev with C++ workload for Visual Studio are installed
+    "npm init" in command line to create package.json file
+    "npm install node-sass --save-dev" to specify as dev dependency
+
+- If receiving a project with only package.json file but no node_modules folder,
+    just run the "npm install" command, which will go through package.json and download
+    the appropriate versions of things
+
+- To actuall use SASS:
+    - Create folder to put SASS files in
+    - Create SASS files and do some SASS coding
+    - In package.json in "scripts", include "compile:sass": "node-sass sass/main.scss css/style.css"
+    - In command prompt, run "npm run compile:sass"
+    - To keep from having to rerun npm run compile:sass, add the -w (watch) flag
+        - "npm run compile:sass -w"
+        - this means that if you close the terminal, it will stop watching :(
+
+- 
+*/
+
+/*
+BOX TYPES
+
+Block-level boxes (display:block)       elements formatted visually as blocks
+                                        100% of parent's width
+                                        vertically, one after another
+                                        box-model applies
+
+Inline boxes (display:inline)           content is distributed in lines
+                                        occupies only content's space
+                                        no linebreaks
+                                        no heights or widths
+                                        paddings and margins only apply on left and right (!?)
+
+Inline-block (display: inline-block)    mix of block and inline
+                                        occupies only content's space
+                                        no line-breaks
+                                        box-model applies
+*/
+
+/*
+POSITIONING SCHEMES
+
+Normal Flow                             default positioning
+                                        not floated
+                                        not absolutely positioned
+                                        elements laid out according to source order
+
+Floats                                  element is removed from the normal flow
+                                        text and inline elements will wrap around the floated element
+                                        container will not adjust its height to the element (use clear fixes to fix)
+
+Absolute Positioning                    element is removed from the normal flow
+                                        no impact on surrounding content or elements
+                                        use top, bottom, left, and right to offset the element from its relatively positioned center
+*/
+
+/*
+STACKING CONTEXTS
+
+z-index                                 highest z-index appears on top
+however, other things also affect stacking context -- opacity, transform, filter, etc.
+*/
+
+@import "abstracts/functions"; //doesn't include "_" or ".scss" in file name
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+@import "base/base"; 
+@import "base/animations";
+@import "base/typography";
+@import "base/utilities";
+
+@import "components/button";
+@import "components/composition";
+@import "components/feature-box";
+
+@import "layout/header";
+@import "layout/grid";
+
+@import "pages/home";
+

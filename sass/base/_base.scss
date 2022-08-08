@@ -1,0 +1,19 @@
+// partial scss file
+
+*,
+*::after,
+*::before { /* basic reset, applies to all elements; need to explicitly include ::before and ::after */
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit; /* force inheritance on each element in page*/
+}
+
+html {
+    // defines what 1rem is, which is more structural than typographical
+    font-size: 62.5%;   /* sets root default font size; makes converting px to rem easy, since 1 rem = 10 px */
+                        /* divide target px (10) by the default pixel size (16) => 62.5% */
+}
+
+body { /* site-wide, inherited */
+    box-sizing: border-box; /* change boxes so that borders and paddings are included in the total height/width */
+}

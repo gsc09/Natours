@@ -1,0 +1,132 @@
+.btn {
+    &:link,
+    &:visited { /* link = pseudo-class */
+        text-transform: uppercase;
+        text-decoration: none; /* no link formatting */
+        padding: 1.5rem 4rem;
+        display: inline-block; /* need this if want height/width/padding; makes this behave like text */
+        border-radius: 10rem;
+        transition: all 0.2s; /* enable all transitions, set duration */
+        position: relative; /* this is to ensure that the ::after pseudo element's absolute positioning works */
+    }
+    
+    &:hover {
+        transform: translateY(-0.3rem); /* relative to initial link state */
+        box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2); /* x-direction, y-direction, blur, color */
+
+        &::after { /* ::after pseudo element only on hover */
+            transform: scalex(1.4) scaley(1.6); /* scale affects size of element */
+            opacity: 0; /* the transition property under the btn::after styling causes this to fade smoothly */
+        }
+    }
+    
+    &:active {
+        transform: translateY(-1px); /* relative to initial link state */
+    }
+    
+    &--white {
+        background-color: $color-white;
+        color: $color-gray-dark;
+
+        &::after {
+            background-color: $color-white;
+        }
+    }
+    
+    &::after { /* pseudo element */
+        content: ""; /* need to define, even if empty */
+        display: inline-block; /* also need to define */
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1; /* need to place hidden behind btn */
+        transition: all 0.4s;
+    }
+    
+    &--animated {
+        animation: moveInButtonFromBottom 0.5s ease-out;
+        animation-delay: 0.5s;
+        animation-fill-mode: backwards; /* will apply the styles of the 0% animation before the animation actually starts */
+    }
+}
+
+// .btn:link,
+// .btn:visited { /* link = pseudo-class */
+//     text-transform: uppercase;
+//     text-decoration: none; /* no link formatting */
+//     padding: 1.5rem 4rem;
+//     display: inline-block; /* need this if want height/width/padding; makes this behave like text */
+//     border-radius: 10rem;
+//     transition: all 0.2s; /* enable all transitions, set duration */
+//     position: relative; /* this is to ensure that the ::after pseudo element's absolute positioning works */
+// }
+
+// .btn:hover {
+//     transform: translateY(-0.3rem); /* relative to initial link state */
+//     box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2); /* x-direction, y-direction, blur, color */
+// }
+
+// .btn:active {
+//     transform: translateY(-1px); /* relative to initial link state */
+// }
+
+// .btn--white {
+//     background-color: $color-white;
+//     color: $color-gray-dark;
+// }
+
+// .btn::after { /* pseudo element */
+//     content: ""; /* need to define, even if empty */
+//     display: inline-block; /* also need to define */
+//     height: 100%;
+//     width: 100%;
+//     border-radius: 10rem;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     z-index: -1; /* need to place hidden behind btn */
+//     transition: all 0.4s;
+// }
+
+// .btn--white::after {
+//     background-color: $color-white;
+// }
+
+// .btn:hover::after { /* ::after pseudo element only on hover */
+//     transform: scalex(1.4) scaley(1.6); /* scale affects size of element */
+//     opacity: 0; /* the transition property under the btn::after styling causes this to fade smoothly */
+// }
+
+// .btn--animated {
+//     animation: moveInButtonFromBottom 0.5s ease-out;
+//     animation-delay: 0.5s;
+//     animation-fill-mode: backwards; /* will apply the styles of the 0% animation before the animation actually starts */
+// }
+
+.btn-text {
+    &:link,
+    &:visited {
+        font-size: 1.3rem;
+        color: $color-primary;
+        display: inline-block; //use box properties like padding, margin
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary; //can set padding
+        padding: 3px; //can use px for sizes of this tiny magnitude
+
+    }
+
+    &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-black, .15);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        box-shadow: 0 0.5rem 1rem rgba($color-black, .15);
+        transform: translateY(0);
+    }
+}

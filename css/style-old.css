@@ -1,0 +1,279 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/*
+SASS
+
+- CSS pre-processor 
+- allows for variables, nesting, operators, partials/imports, mixins, functions, extensions, control directives (not covered here)
+- Sass vs SCSS - two different syntaxes for SASS. Sass isn't indent-dependent and doesn't require semicolons/curly braces; kinda confusing
+    - SCSS is preferred, looks more like original CSS
+
+- variables:        
+    - starts with a $
+
+- color functions - can darken a color instead of manually selecting a darker color
+
+- TO INSTALL, first install Node and then:
+    make sure python and Desktop dev with C++ workload for Visual Studio are installed
+    "npm init" in command line to create package.json file
+    "npm install node-sass --save-dev" to specify as dev dependency
+
+- If receiving a project with only package.json file but no node_modules folder,
+    just run the "npm install" command, which will go through package.json and download
+    the appropriate versions of things
+
+- To actuall use SASS:
+    - Create folder to put SASS files in
+    - Create SASS files and do some SASS coding
+    - 
+*/
+
+/*
+BOX TYPES
+
+Block-level boxes (display:block)       elements formatted visually as blocks
+                                        100% of parent's width
+                                        vertically, one after another
+                                        box-model applies
+
+Inline boxes (display:inline)           content is distributed in lines
+                                        occupies only content's space
+                                        no linebreaks
+                                        no heights or widths
+                                        paddings and margins only apply on left and right (!?)
+
+Inline-block (display: inline-block)    mix of block and inline
+                                        occupies only content's space
+                                        no line-breaks
+                                        box-model applies
+*/
+
+/*
+POSITIONING SCHEMES
+
+Normal Flow                             default positioning
+                                        not floated
+                                        not absolutely positioned
+                                        elements laid out according to source order
+
+Floats                                  element is removed from the normal flow
+                                        text and inline elements will wrap around the floated element
+                                        container will not adjust its height to the element (use clear fixes to fix)
+
+Absolute Positioning                    element is removed from the normal flow
+                                        no impact on surrounding content or elements
+                                        use top, bottom, left, and right to offset the element from its relatively positioned center
+*/
+
+/*
+STACKING CONTEXTS
+
+z-index                                 highest z-index appears on top
+however, other things also affect stacking context -- opacity, transform, filter, etc.
+*/
+
+*,
+*::after,
+*::before { /* basic reset, applies to all elements; need to explicitly include ::before and ::after */
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit; /* force inheritance on each element in page*/
+}
+
+html {
+    font-size: 62.5%;   /* sets root default font size; makes converting px to rem easy, since 1 rem = 10 px */
+                        /* divide target px (10) by the default pixel size (16) => 62.5% */
+}
+
+body { /* site-wide, inherited */
+    font-family: "Lato",sans-serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.7; /* 1.7 * bigger than predefined line height */
+    color: #777777;
+    padding: 3rem; /* 30px */
+    box-sizing: border-box; /* change boxes so that borders and paddings are included in the total height/width */
+}
+
+.header {
+    height: 95vh;
+    background-image: 
+        linear-gradient( /* gradient at 80% opacity */
+            to right bottom, 
+            rgba(126, 213, 111, 0.8), 
+            rgba(40, 180, 133, 0.8)
+        ), 
+        url(../img/hero.jpg);
+    background-size: cover; /* fit within encapsulating element */
+    background-position: top; /* top of image always stays at top of browser window */
+    clip-path: polygon( /* crops bg image to 4 specified corners, clockwise */
+        0 0, 
+        100% 0,
+        100% 75vh,
+        0 100%
+    ); 
+    position: relative;
+}
+
+.header__logo-box {
+    position: absolute;
+    top: 4rem; /* starting from parent element with position = relative */
+    left: 4rem; /* so header element needs to have position = relative */
+}
+
+.header__logo {
+    height: 3.5rem;
+}
+
+.header__text-box {
+    position: absolute;
+    top: 40%; /* relative to top edge, not center */
+    left: 50%; /* relative to top edge, not center */
+    transform: translate(-50%, -50%); /* moves textbox so that centers are aligned instead of edges */
+    text-align: center; /* formats text elements, including btn */
+}
+
+.heading-primary {
+    color: #ffffff;
+    text-transform: uppercase;
+    backface-visibility: hidden; /* eliminates possible animation shakiness */
+    margin-bottom: 4rem;
+}
+
+.heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    animation-name: moveInFromLeft; /* apply keyframe animation */
+    animation-duration: 0.75s; /* specify duration */
+    animation-timing-function: ease-out; /* specifies gradation of timing */
+
+    /*
+    animation-delay: 3s; /* delayed by 3 seconds */
+
+    /*
+    animation-iteration-count: 3; /* happens 3x */
+}
+
+.heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+
+    animation: moveInFromRight 0.75s ease-out;
+}
+
+/* animation for moving in from left and also fading in */
+@keyframes moveInFromLeft {
+    0% { /* at beginning of animation */
+        opacity: 0; /* invisible */
+        transform: translateX(-10rem); /* animate horizontally, start towards left */
+        /* transform: rotate(-80deg); /* for the lols */
+    }
+
+    60% {
+        /* transform: rotate(120deg); /* for the lols */
+    }
+
+    80% {
+        transform: translateX(1rem); /* causes slight bounce to the right */
+    }
+
+    100% { /* at end of animation */
+        opacity: 1; /* fully opaque */
+        transform: translateX(0);
+    }
+}
+
+/* animation for moving in from right and also fading in */
+@keyframes moveInFromRight {
+    0% { 
+        opacity: 0; 
+        transform: translateX(10rem);
+    }
+
+    80% {
+        transform: translateX(-1rem);
+    }
+
+    100% { 
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* animation for button moving up from bottom */
+@keyframes moveInButtonFromBottom {
+    0% { 
+        opacity: 0; 
+        transform: translateY(2rem);
+    }
+
+    100% { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn:link,
+.btn:visited { /* link = pseudo-class */
+    text-transform: uppercase;
+    text-decoration: none; /* no link formatting */
+    padding: 1.5rem 4rem;
+    display: inline-block; /* need this if want height/width/padding; makes this behave like text */
+    border-radius: 10rem;
+    transition: all 0.2s; /* enable all transitions, set duration */
+    position: relative; /* this is to ensure that the ::after pseudo element's absolute positioning works */
+}
+
+.btn:hover {
+    transform: translateY(-0.3rem); /* relative to initial link state */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); /* x-direction, y-direction, blur, color */
+}
+
+.btn:active {
+    transform: translateY(-1px); /* relative to initial link state */
+}
+
+.btn--white {
+    background-color: #ffffff;
+    color: #777777;
+}
+
+.btn::after { /* pseudo element */
+    content: ""; /* need to define, even if empty */
+    display: inline-block; /* also need to define */
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* need to place hidden behind btn */
+    transition: all 0.4s;
+}
+
+.btn--white::after {
+    background-color: #ffffff;
+}
+
+.btn:hover::after { /* ::after pseudo element only on hover */
+    transform: scalex(1.4) scaley(1.6); /* scale affects size of element */
+    opacity: 0; /* the transition property under the btn::after styling causes this to fade smoothly */
+}
+
+.btn--animated {
+    animation: moveInButtonFromBottom 0.5s ease-out;
+    animation-delay: 0.5s;
+    animation-fill-mode: backwards; /* will apply the styles of the 0% animation before the animation actually starts */
+}

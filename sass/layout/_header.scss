@@ -1,0 +1,61 @@
+.header {
+    height: 95vh;
+    background-image: 
+        linear-gradient( /* gradient at 80% opacity */
+            to right bottom, 
+            rgba($color-primary-light, 0.8), 
+            rgba($color-primary-dark, 0.8)
+        ), 
+        url(../img/hero.jpg);
+    background-size: cover; /* fit within encapsulating element */
+    background-position: top; /* top of image always stays at top of browser window */
+    clip-path: polygon( /* crops bg image to 4 specified corners, clockwise */
+        0 0, 
+        100% 0,
+        100% 75vh,
+        0 100%
+    ); 
+    position: relative;
+
+    &__logo-box { // replaces .header__logo-box
+        position: absolute;
+        top: 4rem; /* starting from parent element with position = relative */
+        left: 4rem; /* so header element needs to have position = relative */
+    }
+
+    &__logo { // replaces .header__logo
+        height: 3.5rem; 
+    }
+    
+    &__text-box { // replaced .header__text-box
+        position: absolute;
+        top: 40%; /* relative to top edge, not center */
+        left: 50%; /* relative to top edge, not center */
+        transform: translate(-50%, -50%); /* moves textbox so that centers are aligned instead of edges */
+        text-align: center; /* formats text elements, including btn */
+    }
+}
+
+// replaced by &__logo-box
+// .header__logo-box {
+//     position: absolute;
+//     top: 4rem; /* starting from parent element with position = relative */
+//     left: 4rem; /* so header element needs to have position = relative */
+// }
+
+// replaced by &__logo
+// .header__logo {
+//     height: 3.5rem;
+// }
+
+// replaced by &__text-box
+// .header__text-box {
+//     position: absolute;
+//     top: 40%; /* relative to top edge, not center */
+//     left: 50%; /* relative to top edge, not center */
+//     transform: translate(-50%, -50%); /* moves textbox so that centers are aligned instead of edges */
+//     text-align: center; /* formats text elements, including btn */
+// }
+
+
+

@@ -1,0 +1,10 @@
+// partial, does not output css
+
+@mixin clearfix {
+    // append pseudo element after the elemnet which clears the float; fixes height collapsed issue in float scenarios
+    &::after {
+        content: ""; // need to specify or else element will be empty
+        display: table;
+        clear: both; //clear both float-left and float-right
+    }
+}
