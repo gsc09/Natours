@@ -1,0 +1,126 @@
+
+.card {
+    perspective: 150rem; //for making the card look like it has foreshortening
+                         //has to be on parent of card w/rotation
+                         //lower value = more dramatic effect
+    -moz-perspective: 150rem; //for mozilla firefox
+    position: relative;
+    height: 52rem; // needs to be = height of children
+    
+    &__side {
+        height: 52rem;
+        transition: all 0.8s ease;
+        position: absolute; // make sure back and front cards are on top of each other
+                            // when cards are taken out of their natural "flow", the parent's height is collapsed
+                            // so the parent has no height/width unless you define it explicitly
+                            // which is necessary for the "perspective" property to work
+        top: 0;
+        left: 0;
+        width: 100%; //make sure card is uniform width
+        backface-visibility: hidden; // hide back of cards when flipped 180deg
+        border-radius: 3px;
+        overflow: hidden; // hide elements on top of card that break through border & ruin the rounded corner effect
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+        &--front {
+            background-color: $color-white;
+        }
+
+        &--back {
+            transform: rotateY(180deg);
+
+            &-3 {
+                background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+            }
+
+            &-2 {
+                background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+            }
+
+            &-1 {
+                background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
+            }
+        }
+    }
+
+    &:hover &__side--front { // when hover, change styling of .card__side elements
+        transform: rotateY(180deg);
+    }
+
+    &:hover &__side--back {
+        transform: rotateY(360deg);
+    }
+
+//FRONT SIDE CARD STYLING
+    &__picture {
+        background-size: cover;
+        height: 23rem;
+        background-blend-mode: screen; // defines blend mode for all background-image properties
+                                        // not supported in older browsers
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%); //changing shape of picture to have slanted bottom edge
+                                            //(x y) top left, top right, bottom right, bottom left
+
+        &--3 {
+            background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark),
+                                url(../img/nat-5.jpg);
+        }
+
+        &--2 {
+            background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark),
+                                url(../img/nat-5.jpg);
+        }
+
+        &--1 {
+            background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark),
+                                url(../img/nat-5.jpg);
+        }
+    }
+
+    &__heading {
+        font-size: 2.8rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: $color-white;
+        text-align: right;
+        width: 75%;
+
+        // to make text show up on top of image
+        position: absolute;
+        top: 12rem;
+        right: 2rem;
+    }
+
+    &__heading-span {
+        padding: 1rem 1.5rem;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone; // adds all decoration (in this case, padding) to places where the text breaks across multiple lines
+
+        &--1 {
+            background-image: linear-gradient(
+                    to right bottom, 
+                    rgba($color-tertiary-light, 0.85), 
+                    rgba($color-tertiary-dark, 0.85));
+        }
+    }
+
+    &__details {
+        padding: 3rem;
+
+        ul {
+            list-style: none;
+            width: 80%;
+            margin: 0 auto;
+            
+            li {
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 1rem;
+                
+                &:not(:last-child) {
+                    border-bottom: 1px solid $color-gray-light-2;
+                }
+            }
+        }
+    }
+}

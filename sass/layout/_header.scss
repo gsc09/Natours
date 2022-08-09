@@ -9,6 +9,12 @@
         url(../img/hero.jpg);
     background-size: cover; /* fit within encapsulating element */
     background-position: top; /* top of image always stays at top of browser window */
+    -webkit-clip-path: polygon( /* crops bg image to 4 specified corners, clockwise */
+        0 0, 
+        100% 0,
+        100% 75vh,
+        0 100%
+    ); 
     clip-path: polygon( /* crops bg image to 4 specified corners, clockwise */
         0 0, 
         100% 0,
