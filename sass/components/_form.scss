@@ -1,0 +1,49 @@
+
+.form {
+    &__group:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+        font-family: inherit; //automatically pull in Lato font
+        font-size: 1.5rem;
+        color: inherit;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, 0.5);
+        border: none;
+        border-bottom: 3px solid transparent; //make transparent so that when it becomes solid, it doesn't need to create 3px space underneath
+        width: 80%;
+        display: block;
+
+        &:focus {
+            outline: none; //don't want
+            box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+            border-bottom: 3px solid $color-primary;
+
+            &:invalid {
+                border-bottom: 3px solid $color-secondary-dark;
+            }
+        }
+    
+        &::-webkit-input-placeholder { //pseudoelement, represents things on the webpage
+            //only works on safari and chrome
+            color: $color-gray-dark-2;
+        }
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: 0.7rem;
+        display: block;
+        transition: all 0.2s;
+    }
+
+    &__input:placeholder-shown + &__label { //selector for after-adjacent sibling; non-adjacent sibling selector is ~
+        opacity: 0; //still need opacity in order to animate it fading in
+        visibility: hidden; // removes element from the page entirely
+        transform: translateY(-4rem);
+    }
+}

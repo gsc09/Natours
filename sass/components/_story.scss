@@ -1,0 +1,64 @@
+
+.story {
+    width: 75%;
+    margin: 0 auto; // block element within block element, so can use margin:auto to center
+    box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+    background-color: rgba($color-white, 0.6);
+    border-radius: 3px;
+    padding: 5rem 5rem 5rem 9rem; //uneven left padding to account for circle being translated to the left
+    font-size: 1.6rem;
+    transform: skewX(-12deg);
+
+    &__shape {
+        width: 15rem; // needed for circle
+        height: 15rem; // needed for circle
+        float: left; // for circle, needs to be floated
+
+        -webskit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%); // <radius> at <center-x> <center-y>
+
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%); // remove excess image outside of the circle boundary
+
+        transform: translateX(-3rem) //use translate instead of margin, since this is floated and margin should not be messed with
+                    skewX(12.01deg); // skew to offset skew from container .story div
+                                    // skewing 12.01deg instead of 12deg removes image artifacting around the circle
+        
+        position: relative;
+    }
+
+    &__img {
+        height: 100%; //100% of containing shape
+        transform: translateX(-4rem) scale(1.4);
+        backface-visibility: hidden;
+        transition: all 0.2s;
+    }
+
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 0%); //start off lower so that when we hover, it moves up
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 2rem;
+        text-align: center;
+        opacity: 0; //starts off as invisible
+        transition: all 0.2s; //need to apply transition to the element being animated, not the parent >___>
+        backface-visibility: hidden; //did this in header as well, to fix small glitch where element jumps at the end of the animation
+    }
+
+    &__text {
+        transform: skewX(12deg);
+    }
+
+    &:hover &__caption { // when hover over .story element, apply these styles to the .story__caption element
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover &__img {
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%);
+    }
+}

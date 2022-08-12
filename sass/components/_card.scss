@@ -30,7 +30,7 @@
             transform: rotateY(180deg);
 
             &-3 {
-                background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+                background-image: linear-gradient(to right bottom, $color-quaternary-light, $color-quaternary-dark);
             }
 
             &-2 {
@@ -60,15 +60,19 @@
         -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
         clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%); //changing shape of picture to have slanted bottom edge
                                             //(x y) top left, top right, bottom right, bottom left
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px; // needs to be manually set, since the clip path breaks the border-radius/overflow-hidden properties from earlier
 
         &--3 {
-            background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark),
-                                url(../img/nat-5.jpg);
+            // background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark),
+            //                     url(../img/nat-5.jpg);
+            background-image: linear-gradient(to right bottom, $color-quaternary-light, $color-quaternary-dark),
+                                url(../img/nat-7.jpg);
         }
 
         &--2 {
             background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark),
-                                url(../img/nat-5.jpg);
+                                url(../img/nat-6.jpg);
         }
 
         &--1 {
@@ -102,6 +106,20 @@
                     rgba($color-tertiary-light, 0.85), 
                     rgba($color-tertiary-dark, 0.85));
         }
+
+        &--2 {
+            background-image: linear-gradient(
+                    to right bottom, 
+                    rgba($color-primary-light, 0.85), 
+                    rgba($color-primary-dark, 0.85));
+        }
+
+        &--3 {
+            background-image: linear-gradient(
+                    to right bottom, 
+                    rgba($color-quaternary-light, 0.85), 
+                    rgba($color-quaternary-dark, 0.85));
+        }
     }
 
     &__details {
@@ -122,5 +140,30 @@
                 }
             }
         }
+    }
+
+// BACK STYLING
+    &__cta {
+        position: absolute;
+        width: 90%; //prevent button text from being squished into two lines by narrow screen width
+        top: 50%;
+        left: 50%; // 50% or parents height/width
+        transform: translate(-50%, -50%); //this is 50% of element's height/width
+        text-align: center; // ensure button as well as price text are center-aligned
+    }
+
+    &__price-box {
+        margin-bottom: 8rem;
+        color: white;
+    }
+
+    &__price-only {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+    }
+
+    &__price-value {
+        font-size: 6rem;
+        font-weight: 100;
     }
 }
