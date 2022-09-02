@@ -6,7 +6,7 @@
             rgba($color-primary-light, 0.8), 
             rgba($color-primary-dark, 0.8)
         ), 
-        url(../img/hero.jpg);
+        url(../img/hero-small.jpg);
     background-size: cover; /* fit within encapsulating element */
     background-position: top; /* top of image always stays at top of browser window */
     -webkit-clip-path: polygon( /* crops bg image to 4 specified corners, clockwise */
@@ -22,6 +22,21 @@
         0 100%
     ); 
     position: relative;
+
+    @media (min-resolution: 192dpi) and (min-width: 37.5em) //600px / 16 -- media queries ALWAYS in em
+        , //or
+        (min-width: 125em) { //2000px / 16
+        /*use lorge image when res > 1920dpi (standard high-res screen)
+        AND when the screen is at least 600px wide
+        OR when screen is lorge*/
+        background-image: 
+            linear-gradient( /* gradient at 80% opacity */
+                to right bottom, 
+                rgba($color-tertiary-light, 0.8), 
+                rgba($color-tertiary-dark, 0.8)
+            ), 
+            url(../img/hero.jpg); //use large image if res is sufficiently high
+    }
 
     @include respond(phone) {
         -webkit-clip-path: polygon( /* crops bg image to 4 specified corners, clockwise */
