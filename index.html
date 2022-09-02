@@ -13,6 +13,27 @@
         <title>Natours | Exciting tours for adventurous people</title>
     </head>
     <body>
+        <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+
+            <label for="navi-toggle" class="navigation__button">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
+
+            <nav class="navigation__nav">
+                <!--spans entire page, to center the list :D-->
+                <ul class="navigation__list">
+                    <li class="navigation__item"><a href="#" class="navigation__link"><span>01</span>About Natours</a></li>
+                    <li class="navigation__item"><a href="#" class="navigation__link"><span>02</span>Your Benefits</a></li>
+                    <li class="navigation__item"><a href="#" class="navigation__link"><span>03</span>Popular Tours</a></li>
+                    <li class="navigation__item"><a href="#" class="navigation__link"><span>04</span>Stories</a></li>
+                    <li class="navigation__item"><a href="#" class="navigation__link"><span>05</span>Book Now</a></li>
+                </ul>
+            </nav>
+
+            <div class="navigation__background">&nbsp;</div>
+        </div>
+
         <header class="header"> <!-- First "block" according to BEM system -->
             <div class="header__logo-box">
                 <img src="./img/logo-white.png" alt="Logo" class="header__logo">
@@ -52,9 +73,34 @@
                     </div>
                     <div class="col-1-of-2">
                         <div class="composition">
+                            <!--RESOLUTION SWITCHING-->
+                            <img srcset="img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w"
+                                sizes="(max-width: 900px) 20vw, (max-width: 600px) 30vw, 300px"
+                                alt="Photo 1"
+                                class="composition__photo composition__photo--p1"
+                                src="img/nat-1-large.jpg">
+                            <!--use width descriptor and sizes attribute to inform browser of width of images-->
+                            <!--sizes attribute tells browser what percentage of the viewport the image takes up given width of screen-->
+                            <!--last element (300px) is default-->
+                            <!--include original src element in case browser is too old to recognize srcset/sizes-->
+
+                            <img srcset="img/nat-2.jpg 300w, img/nat-2-large.jpg 1000w"
+                                sizes="(max-width: 900px) 20vw, (max-width: 600px) 30vw, 300px"
+                                alt="Photo 2"
+                                class="composition__photo composition__photo--p2"
+                                src="img/nat-2-large.jpg">
+                                
+                            <img srcset="img/nat-3.jpg 300w, img/nat-3-large.jpg 1000w"
+                                sizes="(max-width: 900px) 20vw, (max-width: 600px) 30vw, 300px"
+                                alt="Photo 3"
+                                class="composition__photo composition__photo--p3"
+                                src="img/nat-3-large.jpg">
+
+                            <!-- 
                             <img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
                             <img src="img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
-                            <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3">
+                            <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3"> 
+                            -->
                         </div>
                     </div>
                 </div>
@@ -148,7 +194,7 @@
                                             $299
                                         </p>
                                     </div>
-                                    <a href="#" class="btn btn--white">Book now!</a>
+                                    <a href="#popup" class="btn btn--white">Book now!</a>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +230,7 @@
                                             $499
                                         </p>
                                     </div>
-                                    <a href="#" class="btn btn--white">Book now!</a>
+                                    <a href="#popup" class="btn btn--white">Book now!</a>
                                 </div>
                             </div>
                         </div>
@@ -220,7 +266,7 @@
                                             $899
                                         </p>
                                     </div>
-                                    <a href="#" class="btn btn--white">Book now!</a>
+                                    <a href="#popup" class="btn btn--white">Book now!</a>
                                 </div>
                             </div>
                         </div>
@@ -300,13 +346,89 @@
                                     <input type="email" class="form__input" placeholder="Email Address" id="email" required>
                                     <label for="email" class="form__label">Email Address</label> <!--clicking on label will set focus to element that label is attached to-->
                                 </div>
+
+                                <div class="form__group u-margin-bottom-medium">
+                                    <div class="form__radio-group">
+                                        <input type="radio" class="form__radio-input" id="smallTours" name="sizeTours">
+                                        <label for="smallTours" class="form__radio-label">
+                                            <span class="form__radio-button"></span>
+                                            Small tour group
+                                        </label>
+                                    </div>
+
+                                    <div class="form__radio-group">
+                                        <input type="radio" class="form__radio-input" id="largeTours" name="sizeTours"> <!--need to have same name to be in same HTML radio button group-->
+                                        <label for="largeTours" class="form__radio-label">
+                                            <span class="form__radio-button"></span>
+                                            Large tour group
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form__group">
+                                    <button class="btn btn--green">Next step &rarr;</button> <!-- needs to actually be a button, which allows form to be submitted-->
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
+
+        <footer class="footer">
+            <div class="footer__logo-box">
+                <picture class="footer__logo">
+                    <!--Art Direction -- serve different image depending on screen size -->
+                    <!-- if max-width is less than 37.5em, use the srceset -->
+                    <source srcset="img/logo-green-small-1x.png 1x, img/logo-green-small-2x.png 2x" 
+                        media="(max-width: 37.5em)"> <!--media query!!-->
+                        <!--maintain density switching depending on screen res (NOT screen size) -->
+                    <img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" 
+                        alt="Full size logo"
+                        src="img/logo-green-2x.png">
+                        <!--include original src in case browser is too old to recognize srcset/media-->
+                </picture>
+
+                <!-- <img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full size logo" class="footer__logo"> -->
+                <!-- use density descriptor, allow browser to choose which density img to use depending on screen resolution -->
+            </div>
+            <div class="row">
+                <div class="col-1-of-2">
+                    <div class="footer__navigation">
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="$" class="footer__link">Company</a></li>
+                            <li class="footer__item"><a href="$" class="footer__link">Contact Us</a></li>
+                            <li class="footer__item"><a href="$" class="footer__link">Careers</a></li>
+                            <li class="footer__item"><a href="$" class="footer__link">Privacy</a></li>
+                            <li class="footer__item"><a href="$" class="footer__link">Terms</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1-of-2">
+                    <p class="footer__copyright">
+                        Built by Grace Chen for online CSS course <a href="https://www.udemy.com/course/advanced-css-and-sass/" class="footer__link">Advanced CSS and SASS</a>. Copyright &copy; <a href="https://codingheroes.io/" class="footer__link">Jonas Schmedtmann</a>. Page can be used for both personal and commercial use, but NOT to claim it as your own design. 
+                    </p>
+                </div>
+            </div>
+        </footer>
         
+        <div class="popup" id="popup">
+            <div class="popup__content">
+                <div class="popup__left">
+                    <img src="img/nat-8.jpg" alt="Tour photo" class="popup__img">
+                    <img src="img/nat-9.jpg" alt="Tour photo" class="popup__img">
+                </div>
+
+                <div class="popup__right">
+                    <a href="#section-tours" class="popup__close">&times;</a>
+                    <h2 class="heading-secondary u-margin-bottom-small">Start booking now</h2>
+                    <h3 class="heading-tertiary u-margin-bottom-small">Important &ndash; Please read these terms before booking</h3>
+                    <p class="popup__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore sed deleniti nam consectetur deserunt accusamus debitis ipsam quasi tenetur atque. Veniam optio alias blanditiis fugiat totam excepturi, quae voluptates cupiditate!</p>
+                    <a href="#" class="btn btn--green">Book now</a>
+                </div>
+            </div>
+        </div>
+
         <!-- For Text Purposes -->
         <!-- <section class="grid-test">
             <div class="row">

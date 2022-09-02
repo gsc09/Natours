@@ -1,0 +1,178 @@
+
+.navigation {
+
+
+    &__checkbox {
+        display: none;
+    }
+
+    &__button {
+        background-color: $color-white;
+        height: 7rem;
+        width: 7rem;
+        border-radius: 50%;
+        position: fixed;
+        top: 6rem;
+        right: 6rem;
+        z-index: 1002;
+        box-shadow: 0 1rem 4rem rgba($color-black, 0.1);
+        text-align: center;
+        cursor: pointer;
+
+        @include respond(tab-port) { //decrease positioning when screen is smaller
+            top: 4rem;
+            right: 4rem;
+        }
+
+        @include respond(phone) { //decrease positioning when screen is smaller
+            top: 3rem;
+            right: 3rem;
+        }
+    }
+
+    &__background {
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        background-image: radial-gradient($color-primary-light, $color-primary-dark); //from middle outward
+        transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1); //cubic-bezier.com, easings.net
+        z-index: 1000;
+
+        position: fixed; //similar to absolute, but fixed doesn't change position as you scroll. also takes element out of the flow
+        top: 6.5rem;
+        right: 6.5rem;
+
+        @include respond(tab-port) { //decrease positioning when screen is smaller
+            top: 4.5rem;
+            right: 4.5rem;
+        }
+
+        @include respond(phone) { //decrease positioning when screen is smaller
+            top: 3.5rem;
+            right: 3.5rem;
+        }
+    }
+
+    &__nav {
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: -40rem; // start off offscreen so that it doesn't interfere with clicking on things on the left side of the screen
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); //cubic-bezier.com, easings.net
+        z-index: -1001; //set to negative value initially, to fix bug where invisible divs are in front of clickable elements
+
+        // starting formatting -- no opacity, collapsed width to make rest of page accessible
+        opacity: 0;
+        width: 0;
+    }
+
+    &__list {
+        position: absolute;
+        list-style: none;
+        text-align: center;
+        width: 100%;
+        @include center;
+    }
+
+    &__item {
+        margin: 1rem;
+    }
+
+    &__link { 
+        display: inline-block; //allows padding and translates to work
+        transition: translate 0.5s, background-position 0.5s; //, width 1s;
+
+        &:link,
+        &:visited {
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 3rem;
+            font-weight: 300;
+            color: $color-white;
+            padding: 1rem 2rem;
+    
+            background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+            background-size: 250%; //relative to top left corner of element
+
+            span {
+                margin-right: 2rem;
+                display: inline-block;
+            }
+        }
+
+        &:hover,
+        &:active {
+            background-position: 100%;
+            color: $color-primary;
+            transform: translateX(1rem);
+        }
+        
+    }
+
+    &__checkbox:checked ~ &__background { // ~ is the non-adjacent sibling selector
+        transform: scale(80);
+    }
+
+    &__checkbox:checked ~ &__nav { // ~ is the non-adjacent sibling selector
+        opacity: 1;
+        width: 100vw;
+        left: 0;
+        z-index: 1001;
+    }
+
+//ICON
+    &__icon {
+        position: relative;
+        margin-top: 3.5rem;
+
+        &,
+        &::before,
+        &::after {
+            width: 30px;
+            height: 2px;
+            background-color: $color-gray-dark-3;
+            display: inline-block;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            transition: all 0.2s;
+        }
+
+        &::before {
+            top: -0.8rem; //one should be above the span element
+        }
+
+        &::after {
+            top: 0.8rem; //the other should be below
+        }
+    }
+
+    &__button:hover &__icon::before {
+        top: -1rem;
+        //transform-origin: center; //not needed, but defines the pivot point for the transformation
+    }
+
+    &__button:hover &__icon::after {
+        top: 1rem;
+    }
+
+    &__checkbox:checked + &__button &__icon { //when checkbox is checked, select the __icon child of its __button sibling
+        //cannot change the size, because that would affect the positioning of the ::before and ::after pseudoelements
+        background-color: transparent;
+    }
+
+    &__checkbox:checked + &__button &__icon::before {
+        top: 0;
+        transform: rotate(135deg);
+    }
+
+    &__checkbox:checked + &__button &__icon::after {
+        top: 0;
+        transform: rotate(-135deg);
+    }   
+
+}

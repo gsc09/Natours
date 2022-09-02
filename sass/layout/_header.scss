@@ -23,6 +23,21 @@
     ); 
     position: relative;
 
+    @include respond(phone) {
+        -webkit-clip-path: polygon( /* crops bg image to 4 specified corners, clockwise */
+            0 0, 
+            100% 0,
+            100% 85vh,
+            0 100%
+        ); //increase vh as screen gets smaller to make the angle less jarring
+        clip-path: polygon( /* crops bg image to 4 specified corners, clockwise */
+            0 0, 
+            100% 0,
+            100% 85vh,
+            0 100%
+        ); 
+    }
+
     &__logo-box { // replaces .header__logo-box
         position: absolute;
         top: 4rem; /* starting from parent element with position = relative */
@@ -35,10 +50,8 @@
     
     &__text-box { // replaced .header__text-box
         position: absolute;
-        top: 40%; /* relative to top edge, not center */
-        left: 50%; /* relative to top edge, not center */
-        transform: translate(-50%, -50%); /* moves textbox so that centers are aligned instead of edges */
         text-align: center; /* formats text elements, including btn */
+        @include center;
     }
 }
 

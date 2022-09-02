@@ -6,7 +6,6 @@ body { /* site-wide, inherited */
     font-size: 1.6rem;
     line-height: 1.7; /* 1.7 * bigger than predefined line height */
     color: $color-gray-dark;
-    padding: 3rem; /* 30px */
 }
 
 .heading-primary {
@@ -20,6 +19,11 @@ body { /* site-wide, inherited */
         font-size: 6rem;
         font-weight: 400;
         letter-spacing: 3.5rem;
+
+        @include respond(phone) {
+            letter-spacing: 2.5rem;
+            font-size: 5rem;
+        }
 
         animation-name: moveInFromLeft; /* apply keyframe animation */
         animation-duration: 0.75s; /* specify duration */
@@ -37,6 +41,10 @@ body { /* site-wide, inherited */
         font-size: 2rem;
         font-weight: 700;
         letter-spacing: 1.7rem;
+
+        @include respond(phone) {
+            letter-spacing: 1.1rem;
+        }
 
         animation: moveInFromRight 0.75s ease-out;
     }
@@ -82,6 +90,15 @@ body { /* site-wide, inherited */
     color: transparent;
     
     transition: all 0.2s;
+
+    @include respond(tab-port) {
+        font-size: 3rem;
+    }
+
+    // phone is smaller than tab-port, so needs to be after
+    @include respond(phone) {
+        font-size: 2.5rem;
+    }
 
     &:hover {
         transform: skewY(2deg) skewX(15deg) scale(1.1);

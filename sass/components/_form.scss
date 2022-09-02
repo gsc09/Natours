@@ -15,6 +15,11 @@
         border-bottom: 3px solid transparent; //make transparent so that when it becomes solid, it doesn't need to create 3px space underneath
         width: 80%;
         display: block;
+        transition: all 0.2s;
+
+        @include respond(tab-port) {
+            width: 100%;
+        }
 
         &:focus {
             outline: none; //don't want
@@ -45,5 +50,58 @@
         opacity: 0; //still need opacity in order to animate it fading in
         visibility: hidden; // removes element from the page entirely
         transform: translateY(-4rem);
+    }
+
+// RADIO BUTTONS
+    &__radio-group {
+        width: 49%;
+        display: inline-block;
+
+        @include respond(tab-port) {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__radio-input {
+        display: none;
+    }
+
+    &__radio-label {
+        font-size: 1.6rem;
+        cursor: pointer;
+        position: relative;
+        padding-left: 4rem;
+    }
+
+    &__radio-button {
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $color-primary;
+        border-radius: 50%; //round!
+        display: inline-block; //needed for button to show up round instead of squished
+        position: absolute;
+        left: 0;
+        top: -0.4rem;
+
+        &::after {
+            content: ""; //needed for every pseudoelement
+            display: block; //also needed for every pseudoelement
+            height: 1.5rem;
+            width: 1.5rem;
+            border-radius: 50%;
+            position: absolute;
+            background-color: $color-primary;
+            @include center;
+
+            //initial visibility
+            opacity: 0;
+            transition: opacity 0.2;
+        }
+    }
+
+    &__radio-input:checked + &__radio-label &__radio-button::after {
+        //select radio button child of radio label, which is the adjacent sibling of a selected ("checked") input
+        opacity: 1;
     }
 }

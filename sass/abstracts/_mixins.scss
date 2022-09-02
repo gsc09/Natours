@@ -8,3 +8,56 @@
         clear: both; //clear both float-left and float-right
     }
 }
+
+@mixin center {
+    top: 50%;
+    left: 50%; // 50% of parents height/width
+    transform: translate(-50%, -50%); //this is 50% of element's height/width
+}
+
+// Media Queries
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+1200 - 1800px:  Desktop
+1800px+:        Big desktop
+*/
+// @mixin respond-phone {
+//     @media (max-width: 600px) {
+//         @content;     // passed in from caller!?
+//     }
+// }
+
+
+// ems and rems are NOT affected by font-size settings in media queries!!
+// 1em = 16px
+/* 
+$breakpoint options:
+    - phone
+    - tab-port
+    - tab-land
+    - big-desktop
+
+ORDER:
+    base
+    typography
+    general layout
+    grid
+    page layout
+    components
+*/
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media (max-width: 37.5em) { @content; }; // = 600px / 16px; use ems, since rems fail in some browsers for media queries
+    }
+    @if $breakpoint == tab-port {
+        @media (max-width: 56.25em) { @content; }; //900px
+    }
+    @if $breakpoint == tab-land {
+        @media (max-width: 75em) { @content; }; //1200px
+    }
+    @if $breakpoint == big-desktop {
+        @media (min-width: 112.5em) { @content; }; //1800px
+    }
+}

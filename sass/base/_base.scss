@@ -12,8 +12,38 @@ html {
     // defines what 1rem is, which is more structural than typographical
     font-size: 62.5%;   /* sets root default font size; makes converting px to rem easy, since 1 rem = 10 px */
                         /* divide target px (10) by the default pixel size (16) => 62.5% */
+
+    // @include respond-phone {
+    //     font-size: 50%;
+    // }
+
+    // width < 900px
+    @include respond(tab-land) {
+        font-size: 56.25%; //1rem = 9px => 9/16 = 56.25%
+    }
+
+    // width < 600px
+    // if both tab-land and tab-port apply, then this one will apply since it's defined later
+    @include respond(tab-port) {
+        font-size: 50%; //1rem = 8px => 8/16 = 50%
+    }
+
+    // width < 
+    @include respond(phone) {
+        font-size: 40%;
+    }
+
+    @include respond(big-desktop) {
+        font-size: 75%; //1rem = 12px => 12/16 = 75%
+    }
 }
 
 body { /* site-wide, inherited */
     box-sizing: border-box; /* change boxes so that borders and paddings are included in the total height/width */
+    padding: 3rem; /* 30px */
+
+    @include respond(tab-port) {
+        padding: 0;
+    }
+
 }

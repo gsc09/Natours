@@ -146,10 +146,8 @@
     &__cta {
         position: absolute;
         width: 90%; //prevent button text from being squished into two lines by narrow screen width
-        top: 50%;
-        left: 50%; // 50% or parents height/width
-        transform: translate(-50%, -50%); //this is 50% of element's height/width
         text-align: center; // ensure button as well as price text are center-aligned
+        @include center;
     }
 
     &__price-box {
@@ -165,5 +163,61 @@
     &__price-value {
         font-size: 6rem;
         font-weight: 100;
+    }
+
+
+    
+
+    @include respond(tab-port) {
+        height: auto; // does NOT to be = height of children
+        border-radius: 3px;
+        background-color: $color-white;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+        &__details {
+            padding: 0 3rem;
+        }
+        
+        &__side {
+            height: auto;
+            position: relative; // no longer have two cards occupying the same space,
+                                // so doesn't need to be absolute
+            box-shadow: none;
+
+            &--back {
+                transform: none;
+                //new
+                clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+
+        &:hover &__side--front { 
+            transform: none;
+        }
+
+        &:hover &__side--back { 
+            transform: none;
+        }
+
+    // BACK STYLING
+        &__cta {
+            position: relative;
+            width: 100%; //prevent button text from being squished into two lines by narrow screen width
+            text-align: center; // ensure button as well as price text are center-aligned
+            //@include center;
+            top: 0;
+            left: 0;
+            transform: translate(0);
+            padding: 4rem;
+        }
+
+        &__price-box {
+            margin: 3rem 0;
+        }
+
+        &__price-value {
+            font-size: 4rem;
+        }
+
     }
 }
