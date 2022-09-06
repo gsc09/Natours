@@ -13,6 +13,14 @@
     visibility: hidden;
     transition: all 0.3s;
 
+    //query if feature is supported
+    @supports(-webkit-backdrop-filter: blur(10px)) or 
+    (backdrop-filter: blur(10px)) {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px); //currently only works in safari
+        background-color: rgba($color-black, 0.3);
+    }
+
 // when popup is open
     &:target { // when this section is targeted, using the #popup id from the Book Now buttons, make this popup visible
         opacity: 1;

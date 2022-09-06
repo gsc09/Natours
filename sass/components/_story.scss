@@ -23,17 +23,23 @@
         height: 15rem; // needed for circle
         float: left; // for circle, needs to be floated
 
-        -webskit-shape-outside: circle(50% at 50% 50%);
-        shape-outside: circle(50% at 50% 50%); // <radius> at <center-x> <center-y>
-
-        -webkit-clip-path: circle(50% at 50% 50%);
-        clip-path: circle(50% at 50% 50%); // remove excess image outside of the circle boundary
-
         transform: translateX(-3rem) //use translate instead of margin, since this is floated and margin should not be messed with
                     skewX(12.01deg); // skew to offset skew from container .story div
                                     // skewing 12.01deg instead of 12deg removes image artifacting around the circle
         
         position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+
+        @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+            -webkit-clip-path: circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%); // remove excess image outside of the circle boundary  
+            width: 15rem; // needed for circle
+            height: 15rem; // needed for circle  
+            -webskit-shape-outside: circle(50% at 50% 50%);
+            shape-outside: circle(50% at 50% 50%); // <radius> at <center-x> <center-y>
+            border-radius: none;
+        }
 
         @include respond(phone) {
             transform: translateX(-3rem) skewX(0);

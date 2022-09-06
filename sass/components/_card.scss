@@ -17,7 +17,10 @@
         top: 0;
         left: 0;
         width: 100%; //make sure card is uniform width
+        
+        -webkit-backface-visibility: hidden;
         backface-visibility: hidden; // hide back of cards when flipped 180deg
+        
         border-radius: 3px;
         overflow: hidden; // hide elements on top of card that break through border & ruin the rounded corner effect
         box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
@@ -168,7 +171,10 @@
 
     
 
-    @include respond(tab-port) {
+    //@include respond(tab-port) {
+    @media only screen and (max-width: 56.25em)
+    , //or
+    only screen and (hover: none) { //hover is not available --> touch screen
         height: auto; // does NOT to be = height of children
         border-radius: 3px;
         background-color: $color-white;
